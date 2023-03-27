@@ -1,0 +1,25 @@
+https://github.com/istio/istio/releases or use https://istio.io/latest/docs/setup/getting-started/
+untar the istio
+export path from bin to canary folder
+istion version
+create cluster with two nodes
+istioctl profile dump
+istioctl profile list - it will list all profiles from there we can choose either one
+istioctl manifest install --set profile=demo - choosen demo and installed
+kubens
+kubens namespace - to change ns
+kubectl get crds
+kubectl get svc
+kubectl get pods
+istioctl kube-inject --filename  
+istioctl kube-inject --filename | kubectl apply --filename  --to inject the istio on file
+kubectl label namespace default istio-injection-enabled -- to inject istio to namespace so that all
+applicaations will use istio
+kubectl rollout restart deployment filename
+create all files like service, deployment, virtual service, destination rule, gateway
+once pods, virtualservices, svc are created
+expose the application to istio ingress using export method
+
+
+
+
