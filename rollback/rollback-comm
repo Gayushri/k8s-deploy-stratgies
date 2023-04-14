@@ -1,0 +1,16 @@
+kuebctl get all
+kubectl get deployments
+kubectl get rs
+kubectl set image deployment/nodeapp nodeapp=kammana/nodeapp:v2
+kubectl rollout status deployment/nodeapp
+kubectl rollout undo deployment/nodeapp
+kubectl rollout status deployment/nodeapp
+kubectl rollout history deployment/nodeapp
+kubectl rollout undo deployment/nodeapp --to-revision=5
+kubectl describe deployment test-deploy
+kubectl rollout history deployment/test-deploy
+
+
+kodekloud/simple-webapp:green
+
+kubectl patch service service name -p ' {"spec": {"selector":{"version":"v1"}}}'
