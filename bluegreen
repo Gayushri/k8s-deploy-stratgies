@@ -51,3 +51,59 @@ spec:
   selector:
     app: my-app
     version: v1
+    
+    apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-v2
+  labels:
+    app: my-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: my-app
+        version: v2
+    spec:
+      containers:
+        - name: my-app
+          image: kodekloud/simple-webapp:green
+          ports:
+          - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 15
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app
+  labels:
+    name: my-app
+    version: v2
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: my-app
+    version: v2
+
+    
